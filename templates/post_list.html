@@ -4,6 +4,13 @@
 
   <div class="col-sm-6 col-sm-offset-3">
     <h1>{{ title }}</h1>
+
+    <form method='get' action="">
+      <input type='text' name='q' placeholder="Search posts" value="{{request.GET.q}}"/>
+      <input type='submit' value="Search" />
+    </form><br />
+
+
     {% for obj in object_list %}
     <div class="row">
       <div class="col-sm-12">
@@ -12,6 +19,7 @@
           <img src='{{ obj.image.url }}' class="img-responsive"/>
           {% endif %}
           <div class="caption">
+            {% if obj.draft %}<h3>Staff only: Draft</h3>{% if obj.publish > today %}<h3>Staff only: Future Post{% endif %}</h3>{% endif %}
             <h3>
               <!-- <a href='/posts/{{ obj.id }}/'>{{ obj.title }}</a> <br/> -->
               <!-- <a href='{% url "posts:detail" slug=obj.slug %}'>{{ obj.title }}</a> <br/> -->
